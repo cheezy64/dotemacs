@@ -6,12 +6,25 @@
 ;; parens packages
 
 ;;;_. =================================================
+;;;_. Unicode Encoding
+;;;_. =================================================
+(setq utf-translate-cjk-mode nil) ; disable CJK coding/encoding (Chinese/Japanese/Korean characters)
+(set-language-environment 'utf-8)
+(set-keyboard-coding-system 'utf-8-mac) ; For old Carbon emacs on OS X only
+(setq locale-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(unless (eq system-type 'windows-nt)
+  (set-selection-coding-system 'utf-8))
+(prefer-coding-system 'utf-8)
+
+;;;_. =================================================
 ;;;_. Package initialization
 ;;;_. =================================================
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 
 (package-initialize)
 
@@ -35,6 +48,10 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(setq molokai-theme-kit t)
+(load-theme 'molokai t)
 
 (require 'utility)
 (require 'init-misc) ;; misc
@@ -66,9 +83,9 @@
     (require 'init-evil)
     (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
     (evil-mode t)
-;    (add-hook 'c-mode-common-hook
-;      (function (lambda ()
-;                  (setq evil-shift-width 3))))
+    (add-hook 'c-mode-common-hook
+      (function (lambda ()
+                  (setq evil-shift-width 3))))
   )
 )
 
@@ -216,19 +233,8 @@
   (global-set-key (kbd "C-x o") 'switch-window)
 )
 
-;; color theme
-(use-package color-theme
-  :ensure t
-)
-(use-package color-theme-molokai
-  :ensure t
-  :config
-  (color-theme-molokai)
-)
-
 
 ;;;_ , yasnippet
-
 (use-package yasnippet
   :ensure t
   :if (not noninteractive)
