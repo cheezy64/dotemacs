@@ -70,6 +70,7 @@
      (add-hook mode-hook ,func)))
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
+(defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;;_. =================================================
 ;;;_. PACKAGES
@@ -108,6 +109,9 @@
 
 (use-package evil-nerd-commenter
   :ensure t
+  :commands (evilnc-comment-or-uncomment-lines
+             evilnc-copy-and-comment-lines
+            )
   :config
   (progn
     (evilnc-default-hotkeys)
@@ -208,16 +212,17 @@
   )
 )
 
+(use-package helm-gtags
+  :disabled nil
+  :ensure t
+  :config
+  (require 'init-helm-gtags)
+)
+
 (use-package ws-butler
   :ensure t
   :init
   (add-hook 'c-mode-common-hook 'ws-butler-mode)
-)
-
-(use-package helm-gtags
-  :ensure t
-  :config
-  (require 'init-helm-gtags)
 )
 
 (use-package ace-jump-mode
