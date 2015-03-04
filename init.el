@@ -107,9 +107,7 @@
 )
 
 (use-package evil-nerd-commenter
-  :disabled t
   :ensure t
-  :commands (evilnc-comment-operator evilnc-copy-and-comment-lines)
   :config
   (progn
     (evilnc-default-hotkeys)
@@ -151,6 +149,7 @@
   :config
   (progn
     (evil-leader/set-key
+      ","  'evilnc-comment-or-uncomment-lines
       "al" 'align-regexp
       "cb" 'evilcvn-change-symbol-in-whole-buffer
       "cd" 'evilcvn-change-symbol-in-defun
