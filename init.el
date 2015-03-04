@@ -1,4 +1,4 @@
-;; TODO check all leader keys are defined, download mark complete, evil nerd commenter hotkeys don't work
+;; TODO check all leader keys are defined, download mark complete
 ;; workgroups2
 ;; ws butler
 ;; clean anindent
@@ -289,11 +289,20 @@ $0"))))
     (yas-reload-all)
 ))
 
-;;(autoload 'highlight-symbol-at-point "highlight-symbol" "" t)
-
 (use-package highlight-symbol
   :ensure t
   :commands (highlight-symbol-at-point highlight-symbol-query-replace)
+)
+
+(use-package semantic
+  :commands (semantic-mode)
+  :idle (semantic-mode)
+  :config
+  (progn
+    (global-semanticdb-minor-mode 1)
+    (global-semantic-idle-scheduler-mode 1)
+    (semantic-mode 1)
+  )
 )
 
 (use-package company
