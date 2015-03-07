@@ -348,10 +348,9 @@ $0"))))
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
-  '(evil-search-highlight-persist-highlight-face ((t (:background "green"))))
+  '(ebrowse-root-class ((t (:foreground "dark orange" :weight bold))))
+  '(evil-search-highlight-persist-highlight-face ((t (:background "dark olive green"))))
 )
-
-;;;_. Post initialization
 
 (when window-system
   (let ((elapsed (float-time (time-subtract (current-time)
