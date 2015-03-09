@@ -296,6 +296,12 @@ $0"))))
   :commands (highlight-symbol-at-point highlight-symbol-query-replace)
 )
 
+(use-package fic-mode
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'fic-mode)
+)
+
 (use-package semantic
   :commands (semantic-mode helm-semantic-or-imenu)
   :idle (semantic-mode)
