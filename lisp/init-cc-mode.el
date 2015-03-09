@@ -1,3 +1,5 @@
+(add-to-list 'auto-mode-alist '("\\.ipp\\'"  . c++-mode))
+
 (defun my-c-mode-hook ()
   (setq c-style-variables-are-local-p nil)
   (setq c-auto-newline nil)
