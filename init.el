@@ -165,7 +165,9 @@
       "fp" 'cp-fullpath-of-current-buffer
       "gf" 'helm-gtags-find-tag
       "gr" 'helm-gtags-find-rtag
+      "gs" 'helm-gtags-find-symbol
       "gt" 'helm-gtags-dwim
+      "gof" 'helm-gtags-find-tag-other-window
       "hb" 'helm-back-to-last-point
       "hr" 'helm-recentf
       "hs" 'helm-swoop
