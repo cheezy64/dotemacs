@@ -234,11 +234,10 @@
 
 (use-package window-numbering
   :ensure t
-  :commands switch-window
   :config
   (global-set-key (kbd "C-x o") 'switch-window)
+  (window-numbering-mode t)
 )
-
 
 ;;;_ , yasnippet
 (use-package yasnippet
