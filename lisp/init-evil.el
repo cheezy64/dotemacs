@@ -52,7 +52,6 @@
 				 (eshell-mode		. emacs)
 				 (shell-mode		. emacs)
 				 (magit-log-edit-mode	. insert)
-				 (fundamental-mode	. emacs)
 				 (weibo-timeline-mode	. emacs)
 				 (weibo-post-mode	. emacs)
 				 (sr-mode		. emacs)

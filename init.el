@@ -1,4 +1,4 @@
-;; TODO check all leader keys are defined, download mark complete
+; TODO check all leader keys are defined, download mark complete
 ;; workgroups2
 ;; ws butler
 ;; clean anindent
@@ -46,6 +46,7 @@
   (message "Loading %s..." load-file-name))
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/defuns"))
 
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
@@ -64,6 +65,8 @@
 
 (require 'init-cc-mode)
 
+(require 'package-mode)
+
 ;; TODO move to file
 (defmacro hook-into-modes (func modes)
   `(dolist (mode-hook ,modes)
@@ -71,6 +74,13 @@
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+
+(setq auto-mode-alist
+      (append '(("package$" . package-mode)
+                ("\\.mak$" . makefile-mode)
+                ) auto-mode-alist))
+
 
 ;;;_. =================================================
 ;;;_. PACKAGES
@@ -235,7 +245,6 @@
 (use-package window-numbering
   :ensure t
   :config
-  (global-set-key (kbd "C-x o") 'switch-window)
   (window-numbering-mode t)
 )
 
