@@ -268,7 +268,7 @@
                      erc-mode-hook))
   :config
   (progn
-    (yas-load-directory "~/.emacs.d/snippets/")
+    (setq yas-snippet-dirs "~/.emacs.d/snippets/")
     (yas-reload-all)
 ))
 
