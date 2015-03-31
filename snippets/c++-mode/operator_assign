@@ -1,12 +1,16 @@
 # -*- mode: snippet -*-
 # name: operator=
-# key: =
+# key: op=
 # where this is a reference to myself
 # --
-${1:MyClass}& $1::operator=(const $1 &rhs) {
-    // Check for self-assignment!
-    if (this == &rhs)
+${1:MyClass}& $1::operator=(const $1 &rhs)
+{
+   // Check for self-assignment!
+   if (this == &rhs)
+   {
       return *this;
-    $0
-    return *this;
+   }
+
+   ${2://Replace with assignments}
+   return *this;
 }

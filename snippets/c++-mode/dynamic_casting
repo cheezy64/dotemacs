@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: dynamic_casting
-# key: cast
+# key: dcast
 # --
-check_and_cast<${1:Type} *>(${2:msg});
+dynamic_cast<${1:Type} *>(${2:msg});

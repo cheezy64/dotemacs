@@ -2,8 +2,6 @@
 # name: namespace
 # key: ns
 # --
-namespace ${1:Namespace} {
-          
-          `yas/selected-text`
-
-}
+namespace ${1:Namespace}
+{
+`(or yas/selected-text (car kill-ring))`} // $1
