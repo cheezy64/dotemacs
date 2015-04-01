@@ -93,6 +93,13 @@
   (progn
     (require 'init-evil)
     (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+
+    ;;;; Enable emacs bindings when in insert mode
+    ;; remove all keybindings from insert-state keymap
+    (setcdr evil-insert-state-map nil)
+    ;; but [escape] should switch back to normal state
+    (define-key evil-insert-state-map [escape] 'evil-normal-state)
+
     (evil-mode t)
     (add-hook 'c-mode-common-hook
       (function (lambda ()
