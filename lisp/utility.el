@@ -67,8 +67,30 @@ to replace the symbol under cursor"
   "copy full path into the yank ring and OS clipboard"
   (interactive)
   (when buffer-file-name
-    (copy-yank-str (file-truename buffer-file-name))
-    (message "file full path => clipboard & yank ring")
+    (let (name)
+      (setq name (file-truename buffer-file-name))
+      ;; For Windows, replace slashes with appropriate slash
+      (if (eq system-type 'windows-nt)
+          (setq name (replace-regexp-in-string "/" "\\\\" name))
+        )
+      (copy-yank-str name)
+      (message "file full path => clipboard & yank ring"))
     ))
+
+;; http://ergoemacs.org/emacs/elisp_change_space-hyphen_underscore.html
+(defun replace-slash-toggle ()
+  "Replace forward slash with back slash and vice versa
+  in the current region or line.
+  If there's a text selection, work on the selected text."
+  (interactive)
+  (let (li bds)
+    (setq bds
+          (if (use-region-p)
+              (cons (region-beginning) (region-end))
+              (bounds-of-thing-at-point 'line)))
+    (setq li (buffer-substring-no-properties (car bds) (cdr bds)))
+    (if (> (cl-count 47 li) (cl-count 92 li))
+        (replace-string "/" "\\" nil (car bds) (cdr bds))
+        (replace-string "\\" "/" nil (car bds) (cdr bds)))))
 
 (provide 'utility)
