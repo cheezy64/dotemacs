@@ -8,4 +8,3 @@ else if (${3:condition})
 {
    $4
 }
-$0
