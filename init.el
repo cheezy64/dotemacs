@@ -5,6 +5,12 @@
 ;; helm swoop
 ;; parens packages
 
+;; figure out how to change filepath to use "\"
+;; open current buffer in new frame
+;; copy full path, filename, and line number for use in windbg
+;; switch to trunk, dev
+;; open current file in perforce
+
 ;;;_. =================================================
 ;;;_. Unicode Encoding
 ;;;_. =================================================
@@ -126,9 +132,6 @@
 
 (use-package evil-nerd-commenter
   :ensure t
-  :commands (evilnc-comment-or-uncomment-lines
-             evilnc-copy-and-comment-lines
-            )
   :config
   (progn
     (evilnc-default-hotkeys)
@@ -174,6 +177,7 @@
       "al" 'align-regexp
       "cb" 'evilcvn-change-symbol-in-whole-buffer
       "cd" 'evilcvn-change-symbol-in-defun
+      "c/" 'replace-slash-toggle
       "dj" 'dired-jump ;; open the dired from current file
       "eb" 'eval-buffer
       "em" 'erase-message-buffer
@@ -292,6 +296,7 @@
 
 (use-package semantic
   :commands (semantic-mode helm-semantic-or-imenu)
+  :defer 3
   :config
   (progn
     (global-semanticdb-minor-mode 1)
