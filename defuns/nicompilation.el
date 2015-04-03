@@ -29,7 +29,7 @@
   (let ((save-directory default-directory)
         (this-directory (find-dir-with-filename filename default-directory)))
  
-    (unless (string= this-directory "")
+    (when this-directory
       (setq default-directory this-directory)
       (apply (car apply-it) (cdr apply-it))
       (setq default-directory save-directory))))
