@@ -27,7 +27,7 @@
      function to those parameters in the nearest directory with a
      build services package file"
   (let ((save-directory default-directory)
-        (this-directory (find-dir-with-filename filename default-directory)))
+        (this-directory (find-dir-with-filename default-directory filename)))
  
     (when this-directory
       (setq default-directory this-directory)
