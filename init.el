@@ -61,6 +61,8 @@
 (load-theme 'molokai t)
 
 (require 'utility)
+(require 'nicompilation) ;; compilation setup for build services
+(global-set-key (kbd "<f5>") 'my-compile)
 (require 'init-misc) ;; misc
 (require 'init-gui-frames) ;; supress dialog and startup, disable toolbar and scrollbar, opacity
 (require 'init-recentf) ;; performance optimizations for recentf
