@@ -100,4 +100,52 @@ to replace the symbol under cursor"
     (previous-buffer)
     (switch-to-buffer-other-frame target)))
 
+(defun get-parent-dir (dir)
+  "Returns the parent directory of DIR, or an empty string if one
+isn't found."
+  (let ((parent-dir (replace-regexp-in-string "[A-Za-z0-9._-]+/?$" "" dir)))
+    (if (equal dir
+               parent-dir)
+        ""
+      parent-dir)))
+
+(defun visit-next-file-with-base-name (&optional otherWindow)
+  "Cycles between files with the same basename as the given file.
+Useful for cycling between header .h/.cpp/.ipp files etc."
+  (interactive)
+  (let* ((currentBufferFileName (replace-regexp-in-string "^.*/" "" (buffer-file-name)))
+         (currentDirectory (replace-regexp-in-string "[a-zA-Z0-9._-]+$" "" (buffer-file-name)))
+         (dotAtBeginning (equal ?\056 (aref currentBufferFileName 0)))
+         (dotAnywhere (find ?\056 currentBufferFileName)))
+    (unless (or dotAtBeginning (not dotAnywhere))
+      (let* ((fileBaseName (replace-regexp-in-string "\\..*" "" currentBufferFileName))
+             (matchFileList (directory-files currentDirectory t (concat "^" fileBaseName "\\.")))
+             (identifiedFileList (member (buffer-file-name)
+                                         matchFileList)))
+        (unless (<= (length matchFileList) 1)
+          (if (eq (length identifiedFileList) 1)
+              (if otherWindow
+                  (find-file-other-window (car matchFileList))
+                (find-file (car matchFileList)))
+            (if otherWindow
+                (find-file-other-window (cadr identifiedFileList))
+              (find-file (cadr identifiedFileList)))))))))
+
+(defun documentation-std ()
+  "Looks up a given function/keyword on cplusplus.com"
+  (interactive)
+  (browse-url (concat "http://www.cplusplus.com/search.do?q="
+                      (documentation-common))))
+
+(defun documentation-common ()
+  "Infrastructure function that other documentation commands use."
+  (let ((wordToLookup (read-string (concat "Keyword to lookup"
+                                           (if (not (string-equal (thing-at-point 'word) ""))
+                                               (concat " (" (thing-at-point 'word) "): ")
+                                             ": ")))))
+    (if (string-equal wordToLookup "")
+        (setq wordToLookup (thing-at-point 'word)))
+    wordToLookup))
+
+
 (provide 'utility)
