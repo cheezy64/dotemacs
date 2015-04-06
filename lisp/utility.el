@@ -93,4 +93,11 @@ to replace the symbol under cursor"
         (replace-string "/" "\\" nil (car bds) (cdr bds))
         (replace-string "\\" "/" nil (car bds) (cdr bds)))))
 
+(defun move-buf-to-new-frame ()
+  "Moves current buffer to new frame and current window to previous buffer"
+  (interactive)
+  (let ((target (current-buffer)))
+    (previous-buffer)
+    (switch-to-buffer-other-frame target)))
+
 (provide 'utility)
