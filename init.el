@@ -66,6 +66,8 @@
 
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
+(setq frame-title-format "%b") ;; show buffer as the frame title
+
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq molokai-theme-kit t)
 (load-theme 'molokai t)
