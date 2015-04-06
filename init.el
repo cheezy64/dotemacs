@@ -10,7 +10,6 @@
 
 ;; switch to trunk, dev
 ;; open current file in perforce
-;; check out frame titles http://www.emacswiki.org/emacs/FrameTitle
 ;; Get familiar with p4-edit and p4 blame
 ;; enable camel case for Evil??  maybe
 ;; check out ctags
@@ -217,10 +216,14 @@
       "mw" 'mc/mark-all-words-like-this-in-defun
       "mf" 'mark-defun
       "nf" 'move-buf-to-new-frame
+      "nn" 'visit-next-file-with-base-name 
       "rw" 'rotate-windows
       "sc" 'shell-command
       "sl" 'sort-lines
+      "sg" 'helm-google-suggest
       "so" 'sos
+      "sp" 'documentation-std
+      "sw" 'helm-wikipedia-suggest
       "srr" 'sr-speedbar-refresh-toggle
       "srt" 'sr-speedbar-toggle
       "ss" 'evil-surround-edit
