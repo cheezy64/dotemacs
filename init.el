@@ -5,11 +5,21 @@
 ;; helm swoop
 ;; parens packages
 
-;; figure out how to change filepath to use "\"
-;; open current buffer in new frame
-;; copy full path, filename, and line number for use in windbg
+;; checkout semantic-refactor -- seems really useful but early stages
+;;  https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org
+
 ;; switch to trunk, dev
 ;; open current file in perforce
+;; check out frame titles http://www.emacswiki.org/emacs/FrameTitle
+;; Get familiar with p4-edit and p4 blame
+;; enable camel case for Evil??  maybe
+;; check out ctags
+;; get familiar with shell and console
+;; grep files in different locations?  like a project?
+;; jump to component?  maybe by making bookmarks when running a script?
+;; rotate windows
+;; leverage a lot of interesting code for the compile command wiki
+;;   http://emacswiki.org/emacs/CompileCommand
 
 ;;;_. =================================================
 ;;;_. Unicode Encoding
@@ -204,6 +214,7 @@
       "ms" 'mc/mark-all-symbols-like-this-in-defun
       "mw" 'mc/mark-all-words-like-this-in-defun
       "mf" 'mark-defun
+      "nf" 'move-buf-to-new-frame
       "rw" 'rotate-windows
       "sc" 'shell-command
       "sl" 'sort-lines
