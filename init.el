@@ -72,8 +72,19 @@
 (load-theme 'molokai t)
 
 (require 'utility)
+
 (require 'nicompilation) ;; compilation setup for build services
 (global-set-key (kbd "<f5>") 'my-compile)
+
+;; Note: To get this to work, I needed to create a client spec and set
+;;  Environment varialbe P4CONFIG=[path to config]
+;;  *IMPORTANT* Also byte compile p4.el for performance improvment
+;; ===P4Config file===
+;; P4CLIENT=YOURP4CLIENTNAME
+;; P4USER=yourP4UserName
+;; P4PORT=perforce:1666
+(require 'p4)
+
 (require 'init-misc) ;; misc
 (require 'init-gui-frames) ;; supress dialog and startup, disable toolbar and scrollbar, opacity
 (require 'init-recentf) ;; performance optimizations for recentf

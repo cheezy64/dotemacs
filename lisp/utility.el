@@ -147,5 +147,16 @@ Useful for cycling between header .h/.cpp/.ipp files etc."
         (setq wordToLookup (thing-at-point 'word)))
     wordToLookup))
 
+(defun p4_introduced ()
+ "Run p4_introduced on the line containing point in the current buffer"
+ (interactive)
+ (let ((file (buffer-file-name))
+       (line (count-lines 1 (point)))
+       (script "C:\\penguin\\iak\\src\\tools\\python\\p4_introduced.py")
+       (python "C:\\Python27\\python.exe")
+       (resize-mini-windows nil)
+       (output "*p4_introduced output*"))
+  (shell-command (format "%s \"%s\" \"%s\" %d" python script file line) output)
+  (display-buffer output)))
 
 (provide 'utility)
