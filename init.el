@@ -9,8 +9,6 @@
 ;;  https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org
 
 ;; switch to trunk, dev
-;; open current file in perforce
-;; Get familiar with p4-edit and p4 blame
 ;; enable camel case for Evil??  maybe
 ;; check out ctags
 ;; get familiar with shell and console
@@ -19,6 +17,9 @@
 ;; rotate windows
 ;; leverage a lot of interesting code for the compile command wiki
 ;;   http://emacswiki.org/emacs/CompileCommand
+
+;; check out modelines
+;;;https://github.com/Malabarba/smart-mode-line
 
 ;;;_. =================================================
 ;;;_. Unicode Encoding
