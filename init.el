@@ -1,3 +1,9 @@
+;; bugs
+;;  emacsclientw instances don't get closed.  is C-x # the only way?  is it the right way?
+;;  maybe prevent runemacs from running if the two servers are already started
+;; pressing "X" on top right won't close emacs the correct way when server is loaded.  override hook?  disable this button if possible?
+
+;; 
 ; TODO check all leader keys are defined, download mark complete
 ;; workgroups2
 ;; ws butler
@@ -9,8 +15,7 @@
 ;;  https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org
 
 ;; switch to trunk, dev
-;; open current file in perforce
-;; Get familiar with p4-edit and p4 blame
+;; open current file in perforce - doesn't seem possible
 ;; enable camel case for Evil??  maybe
 ;; check out ctags
 ;; get familiar with shell and console
@@ -19,6 +24,8 @@
 ;; rotate windows
 ;; leverage a lot of interesting code for the compile command wiki
 ;;   http://emacswiki.org/emacs/CompileCommand
+
+;; http://stackoverflow.com/a/9661665 (gtags-find-file)
 
 ;;;_. =================================================
 ;;;_. Unicode Encoding
@@ -110,6 +117,27 @@
       (append '(("package$" . package-mode)
                 ("\\.mak$" . makefile-mode)
                 ) auto-mode-alist))
+
+;;;_. =================================================
+;;;_. Emacs Server (to allow emacsclient)
+;;;_.  For the clients, use emacsclientw.exe [-f servername]
+;;;_. =================================================
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+;; Workaround to behave like a daemon on Windows
+;;  http://emacs-fu.blogspot.com/2009/03/windows-and-daemons.html
+;; (if (eq system-type 'windows-nt)
+    (progn
+      (defun hide-instead-of-kill ()
+        "Hide window instead of killing so we can use it as a daemon"
+        (interactive)                                                                                     
+        (server-edit)
+        (make-frame-invisible nil t))                                                                     
+      (when (server-running-p server-name)
+        (global-set-key (kbd "C-x C-c") 'hide-instead-of-kill)))
+;; )
 
 
 ;;;_. =================================================
@@ -393,3 +421,4 @@
                  (message "Loading %s...done (%.3fs) [after-init]"
                           ,load-file-name elapsed)))
             t))
+
