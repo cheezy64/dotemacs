@@ -45,3 +45,5 @@ projectile-bookmarks.eld
 history
 .DS_Store
 recentf
+server/
+!defuns/*.elc
