@@ -75,8 +75,6 @@
 
 ;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
-(setq frame-title-format (concat "%b - " server-name)) ;; show buffer and server as the frame title
-
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq molokai-theme-kit t)
 (load-theme 'molokai t)
@@ -118,7 +116,8 @@
 
 (setq auto-mode-alist
       (append '(("package$" . package-mode)
-                ("\\.mak$" . makefile-mode)
+                ("\\.mak$"  . makefile-mode)
+                ("\\.cs$"   . makefile-mode)
                 ) auto-mode-alist))
 
 ;;;_. =================================================
@@ -128,6 +127,11 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+(if (boundp 'server-name)
+  (setq frame-title-format (concat "%b - " server-name)) ;; show buffer and server as the frame title
+  (setq frame-title-format "%b") ;; show buffer only
+)
 
 ;; Workaround to behave like a daemon on Windows
 ;;  http://emacs-fu.blogspot.com/2009/03/windows-and-daemons.html
@@ -364,6 +368,27 @@
     (semantic-mode 1)
     (global-semantic-stickyfunc-mode)
   )
+)
+
+(use-package multiple-cursors
+  :ensure t
+  :init
+  (progn
+    (add-hook 'multiple-cursors-mode-enabled-hook 'evil-emacs-state)
+    (add-hook 'multiple-cursors-mode-disabled-hook 'evil-normal-state)
+  )
+  :config
+  (progn
+    (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+    (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+    (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+    (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+  )
+)
+
+(use-package csharp-mode
+  :ensure t
+  :commands (csharp-mode)
 )
 
 (use-package company
