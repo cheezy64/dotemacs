@@ -8,7 +8,6 @@
 ;; workgroups2
 ;; ws butler
 ;; clean anindent
-;; helm swoop
 ;; parens packages
 
 ;; checkout semantic-refactor -- seems really useful but early stages
@@ -260,7 +259,9 @@
       "gof" 'helm-gtags-find-tag-other-window
       "hb" 'helm-back-to-last-point
       "hr" 'helm-recentf
-      "hs" 'helm-swoop
+      "hss" 'helm-swoop
+      "hsm" 'helm-multi-swoop
+      "hsa" 'helm-multi-swoop-all
       "hd" 'describe-function
       "hv" 'describe-variable
       "hf" 'find-function
@@ -314,6 +315,15 @@
   :ensure t
   :config
   (require 'init-helm-gtags)
+)
+
+(use-package helm-swoop
+  :ensure t
+  :config
+  (progn
+    ;; If nil, you can slightly boost invoke speed in exchange for text color
+    (setq helm-swoop-speed-or-color t)
+  )
 )
 
 (use-package ws-butler
