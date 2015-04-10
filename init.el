@@ -125,8 +125,18 @@
 ;;;_.  For the clients, use emacsclientw.exe [-f servername]
 ;;;_. =================================================
 (require 'server)
-(unless (server-running-p)
-  (server-start))
+(when (eq (server-running-p "server") :other)
+    (server-force-delete))
+(when (eq (server-running-p "project") :other)
+    (server-force-delete "project"))
+(if (not (server-running-p))
+  (server-start)
+  (unless (server-running-p "project")
+    (progn
+      (setq server-name "project")
+      (server-start))
+    )
+)
 
 (if (boundp 'server-name)
   (setq frame-title-format (concat "%b - " server-name)) ;; show buffer and server as the frame title
