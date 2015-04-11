@@ -1,3 +1,9 @@
+;; Setup
+;;  On OS X, make sure that you install grep from homebrew
+;;   brew tap homebrew/dupes
+;;   brew install homebrew/dupes/grep
+;;  Get "es.exe" from Search Everything website and use helm-locate
+
 ;; bugs
 ;;  emacsclientw instances don't get closed.  is C-x # the only way?  is it the right way?
 ;;  maybe prevent runemacs from running if the two servers are already started
@@ -9,10 +15,6 @@
 ;; ws butler
 ;; clean anindent
 ;; parens packages
-
-
-;; set Windows to use Search Everything
-;;  https://github.com/emacs-helm/helm/wiki#windowsspecificity
 
 ;; checkout semantic-refactor -- seems really useful but early stages
 ;;  https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org
