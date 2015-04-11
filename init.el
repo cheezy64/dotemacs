@@ -10,8 +10,6 @@
 ;; clean anindent
 ;; parens packages
 
-;; set grep-find-ignored-directories to remove gtags
-;;  https://github.com/emacs-helm/helm/wiki#grep
 
 ;; set Windows to use Search Everything
 ;;  https://github.com/emacs-helm/helm/wiki#windowsspecificity
@@ -95,6 +93,17 @@
 
 ;; Cleaner outline view in org
 (setq org-startup-indented t)
+
+;; Filter out directories and files when grepping
+;;  https://github.com/emacs-helm/helm/wiki#grep
+(eval-after-load "grep"
+  '(progn
+    ;; The commented out ones don't work for some reason
+    ;; (add-to-list 'grep-find-ignored-files "GPATH")
+    ;; (add-to-list 'grep-find-ignored-files "GTAGS")
+    ;; (add-to-list 'grep-find-ignored-files "GRTAGS")
+    (add-to-list 'grep-find-ignored-directories "GTAGSLINKS")
+    ))
 
 (require 'utility)
 
@@ -326,6 +335,19 @@
   :config
   (progn
     (require 'init-helm)
+    ;; Highlight grep match colors using backend
+    ;;  https://github.com/emacs-helm/helm/wiki#highlightinggrepmatchedresults
+    (setenv "GREP_COLORS" "ms=30;43:mc=30;43:sl=01;37:cx=:fn=35:ln=32:bn=32:se=36")
+    (let ((grepcmd "grep"))
+      ;; For Mac, use ggrep if available
+      (when (and
+             (eq system-type 'darwin)
+             (executable-find "ggrep"))
+                 (setq grepcmd "ggrep"))
+        (setq helm-grep-default-command
+            (concat grepcmd " --color=always -d skip %e -n%cH -e %p %f")
+            helm-grep-default-recurse-command
+            (concat grepcmd " --color=always -d recurse %e -n%cH -e %p %f")))
   )
 )
 
