@@ -159,4 +159,15 @@ Useful for cycling between header .h/.cpp/.ipp files etc."
   (shell-command (format "%s \"%s\" \"%s\" %d" python script file line) output)
   (display-buffer output)))
 
+;; These functions are windows specific.  Should refactor out to not be hard coded later on
+(defun open-conemu ()
+  "Opens ConEmu at the current buffer location"
+  (interactive)
+  (shell-command "\"C:\\Program Files\\ConEmu\\ConEmu64.exe\" /cmd cmd /k" nil nil))
+
+(defun open-explorer ()
+  "Opens Windows Explorer at the current buffer location"
+  (interactive)
+  (shell-command "explorer ." nil nil))
+
 (provide 'utility)

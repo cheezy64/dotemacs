@@ -10,6 +10,12 @@
 ;; clean anindent
 ;; parens packages
 
+;; set grep-find-ignored-directories to remove gtags
+;;  https://github.com/emacs-helm/helm/wiki#grep
+
+;; set Windows to use Search Everything
+;;  https://github.com/emacs-helm/helm/wiki#windowsspecificity
+
 ;; checkout semantic-refactor -- seems really useful but early stages
 ;;  https://github.com/tuhdo/semantic-refactor/blob/master/srefactor-demos/demos.org
 
@@ -28,6 +34,12 @@
 ;;;https://github.com/Malabarba/smart-mode-line
 
 ;; http://stackoverflow.com/a/9661665 (gtags-find-file)
+
+;; This makes Emacs ignore the "-e (make-frame-visible)" 
+;; that it gets passed when started by emacsclientw.
+;;  http://www.emacswiki.org/emacs/WThirtyTwoServerMode
+(add-to-list 'command-switch-alist '("(make-frame-visible)" .
+                                     (lambda (s))))
 
 ;;;_. =================================================
 ;;;_. Unicode Encoding
@@ -78,6 +90,12 @@
 (setq molokai-theme-kit t)
 (load-theme 'molokai t)
 
+;; Wrap text
+(visual-line-mode t)
+
+;; Cleaner outline view in org
+(setq org-startup-indented t)
+
 (require 'utility)
 
 (require 'nicompilation) ;; compilation setup for build services
@@ -111,7 +129,6 @@
 
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (defalias 'yes-or-no-p 'y-or-n-p)
-
 
 (setq auto-mode-alist
       (append '(("package$" . package-mode)
@@ -274,6 +291,8 @@
       "mf" 'mark-defun
       "nf" 'move-buf-to-new-frame
       "nn" 'visit-next-file-with-base-name 
+      "oc" 'open-conemu
+      "oe" 'open-explorer
       "rw" 'rotate-windows
       "sc" 'shell-command
       "sl" 'sort-lines
@@ -285,8 +304,8 @@
       "srt" 'sr-speedbar-toggle
       "ss" 'evil-surround-edit
       "tm" 'get-term
+      "vd" 'scroll-other-window
       "vu" '(lambda () (interactive) (scroll-other-window '-))
-      "vv" 'scroll-other-window
     )
     (global-evil-leader-mode t)
   )
