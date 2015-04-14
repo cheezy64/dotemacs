@@ -144,7 +144,7 @@
 (setq auto-mode-alist
       (append '(("package$" . package-mode)
                 ("\\.mak$"  . makefile-mode)
-                ("\\.cs$"   . makefile-mode)
+                ("\\.cs$"   . csharp-mode)
                 ) auto-mode-alist))
 
 ;;;_. =================================================
