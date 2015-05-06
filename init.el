@@ -147,6 +147,13 @@
                 ("\\.cs$"   . csharp-mode)
                 ) auto-mode-alist))
 
+;; Make helm window always appear at bottom
+(add-to-list 'display-buffer-alist
+                    `(,(rx bos "*Helm" (* not-newline) "*" eos)
+                         (display-buffer-in-side-window)
+                         (inhibit-same-window . t)
+                         (window-height . 0.4)))
+
 ;;;_. =================================================
 ;;;_. Emacs Server (to allow emacsclient)
 ;;;_.  For the clients, use emacsclientw.exe [-f servername]
