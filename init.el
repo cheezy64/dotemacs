@@ -154,6 +154,12 @@
                          (inhibit-same-window . t)
                          (window-height . 0.4)))
 
+;; Wrap entries in helm buffer
+;; http://emacs.stackexchange.com/a/12551
+(add-hook 'helm-after-initialize-hook (lambda ()
+                                        (with-helm-buffer
+                                          (visual-line-mode))))
+
 ;;;_. =================================================
 ;;;_. Emacs Server (to allow emacsclient)
 ;;;_.  For the clients, use emacsclientw.exe [-f servername]
@@ -281,6 +287,7 @@
       "cb" 'evilcvn-change-symbol-in-whole-buffer
       "cd" 'evilcvn-change-symbol-in-defun
       "c/" 'replace-slash-toggle
+      "dd" 'uniquify-all-lines-region
       "dj" 'dired-jump ;; open the dired from current file
       "eb" 'eval-buffer
       "em" 'erase-message-buffer
@@ -378,8 +385,8 @@
 
 (use-package ws-butler
   :ensure t
-  :init
-  (add-hook 'c-mode-common-hook 'ws-butler-mode)
+  :config
+  (ws-butler-global-mode t)
 )
 
 (use-package ace-jump-mode
