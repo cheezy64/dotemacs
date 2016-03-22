@@ -40,7 +40,9 @@
      build services package file"
   (mxbs-eval-in-dir "package" apply-it))
 
-(setq compile-command "setupEnv.bat & make")
+(if (eq system-type 'windows-nt)
+    (setq compile-command "setupEnv.bat & make clean & make sync & make")
+    (setq compile-command "source setupEnv.sh; make clean; make sync; make"))
 (defun my-compile (command)
   "Start compilation in nearest parent directory with a 'package'
      file, or current directory if no package file found."
