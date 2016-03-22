@@ -96,6 +96,11 @@
 ;; Cleaner outline view in org
 (setq org-startup-indented t)
 
+;; Configure align-regexp to use spaces rather than tabs
+(defadvice align-regexp (around align-regexp-with-spaces activate)
+  (let ((indent-tabs-mode nil))
+    ad-do-it))
+
 ;; Filter out directories and files when grepping
 ;;  https://github.com/emacs-helm/helm/wiki#grep
 (eval-after-load "grep"
