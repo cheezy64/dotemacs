@@ -84,7 +84,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/defuns"))
 
-;;(byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
+;; (byte-recompile-directory (expand-file-name "~/.emacs.d") 0)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (setq molokai-theme-kit t)
@@ -147,9 +147,9 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq auto-mode-alist
-      (append '(("package$" . package-mode)
-                ("\\.mak$"  . makefile-mode)
-                ("\\.cs$"   . csharp-mode)
+      (append '(("package[#0-9]*$" . package-mode)
+                ("\\.mak[#0-9]*$"  . makefile-mode)
+                ("\\.cs$[#0-9]*$"  . csharp-mode)
                 ) auto-mode-alist))
 
 ;; Make helm window always appear at bottom
@@ -511,13 +511,12 @@
 )
 
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(ebrowse-root-class ((t (:foreground "dark orange" :weight bold))))
-  '(evil-search-highlight-persist-highlight-face ((t (:background "dark olive green"))))
-)
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ebrowse-root-class ((t (:foreground "dark orange" :weight bold))))
+ '(evil-search-highlight-persist-highlight-face ((t (:background "dark olive green")))))
 
 (when window-system
   (let ((elapsed (float-time (time-subtract (current-time)
@@ -532,3 +531,11 @@
                           ,load-file-name elapsed)))
             t))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company csharp-mode multiple-cursors fic-mode highlight-symbol yasnippet window-numbering ace-jump-mode ws-butler helm-swoop helm-gtags helm sos evil-leader evil-search-highlight-persist evil-args evil-nerd-commenter evil-matchit evil-surround evil use-package))))
