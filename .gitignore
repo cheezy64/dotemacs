@@ -46,4 +46,4 @@ history
 .DS_Store
 recentf
 server/
-!defuns/*.elc
+defuns/*.elc
